@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const { AsyncHandle } = require("../helpers/AsyncHandle");
 const userController = require("../controllers/user.controller");
 const { authentication } = require("../helpers/auth");

@@ -5,6 +5,7 @@ const compression = require("compression");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
+const path = require("path");
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -14,6 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./configs/mongoose.config");
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/", require("./routers/index.route"));
 
