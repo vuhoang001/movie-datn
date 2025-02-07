@@ -22,6 +22,7 @@ const { authentication } = require("../helpers/auth");
  *         items:
  *           type: string
  *           description: actorName, actorDescription, placeOfBirth, birthDay, birthDay
+ *           default: {     "actorName": "Nguyen Van A",      "actorDescription": "Mo ta ve Nguyen Van A" }
  *         images:
  *           type: array
  *           items:

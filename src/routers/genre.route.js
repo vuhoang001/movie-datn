@@ -25,6 +25,7 @@ const genreController = require("../controllers/genre.controller");
  *                      default: genre description
  *
  */
+
 /**
  * @swagger
  *  components:

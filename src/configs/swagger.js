@@ -42,6 +42,35 @@ const swaggerOptions = {
             type: "string",
           },
         },
+        Skip: {
+          in: "query",
+          name: "skip",
+          description: "Number of items to skip (for pagination)",
+          required: false,
+          schema: {
+            type: "integer",
+            default: 0,
+          },
+        },
+        Limit: {
+          in: "query",
+          name: "limit",
+          description: "Number of items to return (for pagination)",
+          required: false,
+          schema: {
+            type: "interger",
+            default: 30,
+          },
+        },
+        Search: {
+          in: "query",
+          name: "search",
+          description: "Search",
+          required: false,
+          schema: {
+            type: "string",
+          },
+        },
       },
     },
   },
