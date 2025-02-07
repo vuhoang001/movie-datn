@@ -78,7 +78,6 @@ class UserService {
     const userId = user.userId;
     const email = user.email;
 
-    console.log(user);
     const keyStore = await keyTokenService.findKeyTokenByRefreshToken(
       refreshToken
     );

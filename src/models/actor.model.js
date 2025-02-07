@@ -25,6 +25,8 @@ const ActorSchema = new Schema(
     },
     type: {
       type: String,
+      default: "A",
+      Enum: ["D", "A"],
     },
     status: {
       type: String,

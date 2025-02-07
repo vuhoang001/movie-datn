@@ -5,10 +5,12 @@ const { convertURL } = require("../utils/index");
 class ActorController {
   Create = async (req, res, next) => {
     const { files } = req;
-    req.body.images = convertURL(files);
+    // req.body.images = convertURL(files);
+    let items = JSON.parse(req.body.items);
+    items.images = convertURL(files);
     new SuccessResponse({
       message: "create actor success",
-      metadata: await actorService.Create(req.body),
+      metadata: await actorService.Create(items),
     }).send(res);
   };
 

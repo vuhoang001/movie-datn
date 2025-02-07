@@ -7,6 +7,8 @@ require("dotenv").config();
 const app = express();
 const path = require("path");
 
+const setupSwagger = require("./configs/swagger");
+
 app.use(cors());
 app.use(morgan("dev"));
 app.use(helmet());
@@ -15,6 +17,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./configs/mongoose.config");
+
+// Swagger
+
+setupSwagger(app);
+
+// End swagger
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -32,7 +40,7 @@ app.use((err, req, res, next) => {
   return res.status(status).json({
     status: status,
     code: status,
-    stack: err.stack,
+    // stack: err.stack,
     message: err.message || "Internal Server Error",
   });
 });

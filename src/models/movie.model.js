@@ -16,12 +16,28 @@ const MovieSchema = new Schema(
       type: Number,
       default: 0,
     },
-    time: {
+    runTime: {
       type: Number,
     },
     releaseDate: {
       type: Date,
       default: new Date.now(),
+    },
+    budget: {
+      type: Number,
+      default: 0,
+    },
+    revenue: {
+      type: Number,
+      default: 0,
+    },
+    language: {
+      type: String,
+      default: "",
+    },
+    views: {
+      type: Number,
+      default: 0,
     },
     genre: { type: [Types.ObjectId], default: "" },
     actors: { type: [Types.ObjectId], default: "" },
@@ -32,11 +48,14 @@ const MovieSchema = new Schema(
     videos: {
       type: [String],
     },
-    // status: {
-    //   type: String,
-    //   enum: ["active", "inactive", "deleted"],
-    //   default: "active",
-    // },
+    trailer: {
+      type: String,
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive", "deleted"],
+      default: "active",
+    },
   },
   { timestamps: true, collection: COLLECTION_NAME }
 );
