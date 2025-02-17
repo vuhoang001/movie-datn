@@ -33,9 +33,10 @@ class MovieService {
     await movieModel.deleteOne({ _id: convertToObjectIdMongose(id) });
     return true;
   };
+
   getById = async (slug) => {
     const holder = await movieModel.findOne({
-      _id: convertToObjectIdMongose(id),
+      _id: convertToObjectIdMongose(slug),
     });
 
     if (!holder) throw new BadRequestError("no datasF");

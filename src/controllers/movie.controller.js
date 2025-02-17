@@ -19,12 +19,14 @@ class MovieController {
   };
 
   Update = async (req, res) => {
-    const { images, videos, trailer } = req;
+    const slug = req.params.slug;
+    const { images, videos, trailer } = req.files;
 
     const items = JSON.parse(req.body.items);
-    items.images = convertURL(images);
-    items.videos = convertURL(videos);
-    items.trailer = convertURL(trailer);
+
+    if (images) items.images = convertURL(images);
+    if (videos) items.videos = convertURL(videos);
+    if (trailer) items.trailer = convertURL(trailer);
 
     new SuccessResponse({
       message: "Update movie success",
@@ -32,7 +34,14 @@ class MovieController {
     }).send(res);
   };
 
-  Delete = async (req, res) => {};
+  Delete = async (req, res) => {
+    const slug = req.params.slug;
+
+    new SuccessResponse({
+      message: "Delete movie success",
+      metadata: await movieService.delete(slug),
+    }).send(res);
+  };
   Create = async (req, res) => {
     const { images, videos, trailer } = req.files;
 
