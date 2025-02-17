@@ -30,7 +30,7 @@ class MovieService {
     });
     if (!holder) throw new BadRequestError("no datas");
 
-    await movieModel.deleteOne({ _id: convertToObjectIdMongose(id) });
+    await movieModel.deleteOne({ _id: convertToObjectIdMongose(slug) });
     return true;
   };
 
