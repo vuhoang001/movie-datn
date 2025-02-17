@@ -15,7 +15,7 @@ class MovieController {
     new SuccessResponse({
       message: "Get by id",
       metadata: await movieService.getById(slug),
-    });
+    }).send(res);
   };
 
   Update = async (req, res) => {
