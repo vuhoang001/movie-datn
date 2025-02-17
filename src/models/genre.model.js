@@ -13,7 +13,6 @@ const GenreSchema = new Schema(
       type: String,
       default: "",
     },
-
     status: {
       type: String,
       enum: ["active", "inactive", "deleted"],
