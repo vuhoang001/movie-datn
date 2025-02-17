@@ -4,6 +4,7 @@ const { Types } = require("mongoose");
 const URL_IMG = `${process.env.URL_SERVER}/uploads`;
 
 const convertURL = (images) => {
+
   return images.map((image) => `${URL_IMG}/${image.filename}`);
 };
 
