@@ -32,7 +32,7 @@ const MovieSchema = new Schema(
       default: 0,
     },
     language: {
-      type: String,
+      type: [String],
       default: "",
     },
     views: {
@@ -41,7 +41,6 @@ const MovieSchema = new Schema(
     },
     genre: { type: [Types.ObjectId], ref: "Genre" },
     actors: { type: [Types.ObjectId], ref: "Actor" },
-    language: { type: String },
     images: {
       type: [String],
     },
