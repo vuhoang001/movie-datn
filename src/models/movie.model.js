@@ -49,7 +49,7 @@ const MovieSchema = new Schema(
       type: [String],
     },
     trailer: {
-      type: String,
+      type: [String],
     },
     status: {
       type: String,

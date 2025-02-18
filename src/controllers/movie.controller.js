@@ -1,6 +1,7 @@
 const { SuccessResponse } = require("../response/success.response");
 const movieService = require("../services/movie.service");
 const { convertURL } = require("../utils");
+
 class MovieController {
   GetAll = async (req, res) => {
     const { skip, limit } = req.query;
@@ -46,12 +47,13 @@ class MovieController {
     const { images, videos, trailer } = req.files;
 
     const items = JSON.parse(req.body.items);
-    if (images) {
-      items.images = convertURL(images);
-    }
+    if (images) items.images = convertURL(images);
 
     if (videos) items.videos = convertURL(videos);
+
     if (trailer) items.trailer = convertURL(trailer);
+
+    console.log(items);
 
     new SuccessResponse({
       message: "Create movie success",
