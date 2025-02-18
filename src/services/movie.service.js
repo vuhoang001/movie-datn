@@ -25,7 +25,9 @@ class MovieService {
       .find()
       .skip(skip)
       .limit(limit)
-      .populate("language");
+      .populate("language")
+      .populate("genre")
+      .populate('actor')
     return data;
   };
   delete = async (slug) => {
