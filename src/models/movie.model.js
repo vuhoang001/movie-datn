@@ -32,8 +32,8 @@ const MovieSchema = new Schema(
       default: 0,
     },
     language: {
-      type: [String],
-      default: "",
+      type: [Types.ObjectId],
+      ref: "Language",
     },
     views: {
       type: Number,

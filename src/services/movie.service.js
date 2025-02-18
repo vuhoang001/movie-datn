@@ -21,7 +21,11 @@ class MovieService {
     return result;
   };
   getAll = async (skip = 0, limit = 30) => {
-    const data = await movieModel.find().skip(skip).limit(limit);
+    const data = await movieModel
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .populate("language");
     return data;
   };
   delete = async (slug) => {

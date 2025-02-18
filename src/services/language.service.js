@@ -14,12 +14,15 @@ class LanguageService {
   };
 
   GetAll = async (skip = 0, limit = 30) => {
-    const holder = await languageModel.find().skip(skip).limit(limit);
+    const holder = await languageModel
+      .find()
+      .skip(skip)
+      .limit(limit)
     return holder;
   };
 
   GetByCode = async (code) => {
-    const holder = await languageModel.findOne({ code: code });
+    const holder = await languageModel.findOne({ _id: code });
     return holder;
   };
 }

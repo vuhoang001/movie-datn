@@ -47,12 +47,12 @@ router.get("/languages", AsyncHandle(LanguageController.GetAll));
 
 /**
  * @swagger
- *  /language/{code}:
+ *  /language/{id}:
  *      get:
  *          summary: Get by code
  *          tags: [Language]
  *          parameters:
- *              - $ref: '#/components/parameters/Code'
+ *              - $ref: '#/components/parameters/Id'
  *          responses:
  *              200:
  *                  description: success

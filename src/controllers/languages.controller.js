@@ -18,11 +18,11 @@ class LanguageController {
   };
 
   GetByCode = async (req, res) => {
-    const { code } = req.params;
+    const { id } = req.params;
     console.log(req.params);
     new SuccessResponse({
       message: "Get by code",
-      metadata: await languageService.GetByCode(code),
+      metadata: await languageService.GetByCode(id),
     }).send(res);
   };
 }
