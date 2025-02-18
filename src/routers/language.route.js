@@ -16,14 +16,6 @@ const router = express.Router();
  *      post:
  *          summary: AsyncHanlde
  *          tags: [Language]
- *          requestBody:
- *              required: true
- *              content:
- *                  application/json:
- *                      schema:
- *                          data:
- *                              type: Object
- *
  *          responses:
  *              200:
  *                  description: success

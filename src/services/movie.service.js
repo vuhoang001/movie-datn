@@ -8,7 +8,7 @@ class MovieService {
     return result;
   };
   update = async (slug, data) => {
-    const holder = await movieModel.findOne({ _id: id });
+    const holder = await movieModel.findOne({ _id: slug });
     if (!holder) throw new BadRequestError("no datas");
 
     const result = await movieModel.updateOne(

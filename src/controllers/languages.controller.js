@@ -5,7 +5,7 @@ class LanguageController {
   AsyncData = async (req, res) => {
     new SuccessResponse({
       message: "AsyncData",
-      metadata: await languageService.AsyncData(req.body),
+      metadata: await languageService.AsyncData(),
     }).send(res);
   };
 
