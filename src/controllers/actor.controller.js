@@ -16,8 +16,11 @@ class ActorController {
 
   Update = async (req, res, next) => {
     const { slug } = req.params;
+
     const { files } = req;
-    req.body.images = convertURL(files);
+    // req.body.images = convertURL(files);
+    let items = JSON.parse(req.body.items);
+    if (files) items.images = convertURL(files);
     new SuccessResponse({
       message: "update success",
       metadata: await actorService.Update(slug, req.body),
