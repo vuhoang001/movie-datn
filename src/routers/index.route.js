@@ -7,5 +7,6 @@ router.use("/", require("./actor.route"));
 router.use("/", require("./genre.route"));
 router.use("/", require("./movie.route"));
 router.use("/", require("./group-movie.route"));
+router.use("/", require("./language.route"));
 
 module.exports = router;

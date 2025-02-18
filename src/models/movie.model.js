@@ -39,8 +39,8 @@ const MovieSchema = new Schema(
       type: Number,
       default: 0,
     },
-    genre: { type: [Types.ObjectId] },
-    actors: { type: [Types.ObjectId] },
+    genre: { type: [Types.ObjectId], ref: "Genre" },
+    actors: { type: [Types.ObjectId], ref: "Actor" },
     language: { type: String },
     images: {
       type: [String],
