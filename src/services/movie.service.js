@@ -41,9 +41,13 @@ class MovieService {
   };
 
   getById = async (slug) => {
-    const holder = await movieModel.findOne({
-      _id: convertToObjectIdMongose(slug),
-    });
+    const holder = await movieModel
+      .findOne({
+        _id: convertToObjectIdMongose(slug),
+      })
+      .populate("genre")
+      .populate("language")
+      .populate("actors");
 
     if (!holder) throw new BadRequestError("no datasF");
     return holder;
