@@ -60,6 +60,12 @@ const swaggerOptions = {
             default: 0,
           },
         },
+        Id: {
+          in: "path",
+          name: "id",
+          required: true,
+          schema: { type: "string" },
+        },
         Limit: {
           in: "query",
           name: "limit",

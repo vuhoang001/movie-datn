@@ -20,14 +20,43 @@ class MovieService {
 
     return result;
   };
-  getAll = async (skip = 0, limit = 30) => {
+  getAll = async (search = null, skip = 0, limit = 30) => {
+    let query = {};
+
+    if (search) {
+      // Tạo điều kiện tìm kiếm
+      let orConditions = [
+        { movieName: { $regex: search, $options: "i" } }, // Tìm theo tên phim
+      ];
+
+      // 🔍 Tìm danh sách ID của actors, genre theo tên
+      const [actorIds, genreIds] = await Promise.all([
+        actorModel
+          .find({ actorName: { $regex: search, $options: "i" } })
+          .select("_id"),
+        genreModel
+          .find({ genreName: { $regex: search, $options: "i" } })
+          .select("_id"),
+      ]);
+
+      if (actorIds.length > 0) {
+        orConditions.push({ actors: { $in: actorIds.map((a) => a._id) } });
+      }
+      if (genreIds.length > 0) {
+        orConditions.push({ genre: { $in: genreIds.map((g) => g._id) } });
+      }
+
+      query = { $or: orConditions };
+    }
+
     const data = await movieModel
-      .find()
+      .find(query)
       .skip(skip)
       .limit(limit)
       .populate("language")
       .populate("genre")
-      .populate('actors')
+      .populate("actors");
+
     return data;
   };
   delete = async (slug) => {
