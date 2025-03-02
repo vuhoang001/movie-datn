@@ -1,4 +1,5 @@
 const actorModel = require("../models/actor.model");
+const { BadRequestError } = require("../response/error.response");
 const { ModelStatus } = require("../utils/enum");
 const { convertToObjectIdMongose } = require("../utils/index");
 
@@ -19,16 +20,11 @@ class ActorService {
 
   Update = async (id, data) => {
     const response = await actorModel.findOne({ _id: id });
-    if (!response) return null;
+    if (!response) throw new BadRequestError("no datas")
 
-    const update = await actorModel.updateOne(
-      {
-        _id: convertToObjectIdMongose(id),
-      },
-      data
-    );
+    const result = await actorModel.update({ _id: convertToObjectIdMongose(response._id) }, data)
 
-    return update;
+    return result
   };
 
   Delete = async (id) => {
