@@ -16,7 +16,6 @@ class LanguageController {
       metadata: await languageService.GetAll(skip, limit),
     }).send(res);
   };
-
   GetByCode = async (req, res) => {
     const { id } = req.params;
     console.log(req.params);

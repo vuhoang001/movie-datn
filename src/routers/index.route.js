@@ -9,5 +9,6 @@ router.use("/", require("./movie.route"));
 router.use("/", require("./group-movie.route"));
 router.use("/", require("./language.route"));
 router.use("/", require("./wish-list.route"));
+router.use("/", require("./nation.route"));
 
 module.exports = router;
