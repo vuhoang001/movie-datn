@@ -15,7 +15,7 @@ const accountSchema = new Schema(
       unique: true,
       trim: true,
     },
-    price: {
+    accountBalance: {
       type: Number,
       default: 0,
       min: 0,
@@ -23,6 +23,10 @@ const accountSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    moviePurchased: {
+      type: [Schema.Types.ObjectId],
+      ref: "Movie",
     },
     status: {
       type: String,

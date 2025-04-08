@@ -214,4 +214,27 @@ router.delete(
   authentication,
   AsyncHandle(movieController.RemoveComment)
 );
+
+/**
+ * @swagger
+ *  /movie/{id}/buy:
+ *    post:
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - $ref: '#/components/parameters/Id'
+ *      responses:
+ *        200:
+ *          description: Successfully removed comment from the product
+ *        400:
+ *          description: Bad request (comment not found or unauthorized)
+ *        404:
+ *          description: Product not found
+ */
+router.post(
+  "/movie/:id/buy",
+  authentication,
+  AsyncHandle(movieController.BuyMovie)
+);
 module.exports = router;

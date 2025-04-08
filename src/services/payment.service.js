@@ -25,7 +25,7 @@ class PaymentService {
     if (!userHOlder) {
       throw new BadRequestError("User not found");
     }
-    userHOlder.price += Number(dataParsed.price);
+    userHOlder.accountBalance += Number(dataParsed.price);
     await userHOlder.save();
 
     return "Success";

@@ -74,6 +74,10 @@ const MovieSchema = new Schema(
       enum: ["active", "inactive", "deleted"],
       default: "active",
     },
+    price: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true, collection: COLLECTION_NAME }
 );

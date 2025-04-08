@@ -1,4 +1,5 @@
 const movieModel = require("../models/movie.model");
+const userModel = require("../models/user.model");
 const { BadRequestError } = require("../response/error.response");
 const { convertToObjectIdMongose } = require("../utils");
 
@@ -100,6 +101,26 @@ class MovieService {
 
     await movie.save();
     return "Successfully added comment";
+  };
+
+  BuyMovie = async (movieId, user) => {
+    const movieHolder = await movieModel.findOne({ _id: movieId });
+    if (!movieHolder) throw new BadRequestError("Không tìm thấy phim");
+
+    const userHolder = await userModel.findOne({ _id: user });
+    if (!userHolder) throw new BadRequestError("Không tìm thấy người dùng");
+
+    if (movieHolder.price > userHolder.accountBalance)
+      throw new BadRequestError("Tài khoản không đủ tiền");
+
+    userHolder.accountBalance -= movieHolder.price;
+
+    userHolder.moviePurchased.push(movieId);
+    movieHolder.views += 1;
+
+    await userHolder.save();
+
+    return "Success";
   };
 
   RemoveComment = async (id, commentId, user) => {
