@@ -93,6 +93,14 @@ class MovieService {
     return holder;
   };
 
+  getMovieByUserId = async (userId) => {
+    console.log(1)
+    console.log(userId);
+    const movie = await userModel.findOne({ _id: userId });
+
+    return movie.moviePurchased;
+  };
+
   AddComment = async (id, payload, user) => {
     const { content, rating } = payload;
 

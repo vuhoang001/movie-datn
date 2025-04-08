@@ -237,4 +237,22 @@ router.post(
   authentication,
   AsyncHandle(movieController.BuyMovie)
 );
+
+/**
+ * @swagger
+ *  /movie/me:
+ *    get:
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: succeses
+ */
+router.get(
+  "/movie/:id/buy",
+  authentication,
+  AsyncHandle(movieController.GetMovieByUserId)
+);
+
 module.exports = router;
