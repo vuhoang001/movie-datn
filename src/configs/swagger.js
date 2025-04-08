@@ -12,8 +12,9 @@ const swaggerOptions = {
       description: "API documentation using Swagger", // Mô tả ngắn gọn về API
     },
     servers: [
+      { url: "http://localhost:3005" }, 
       {
-        url: "http://localhost:3000", // Địa chỉ server của API
+        url: "http://localhost:3000", 
       },
     ],
     components: {
@@ -58,6 +59,15 @@ const swaggerOptions = {
           schema: {
             type: "integer",
             default: 0,
+          },
+        },
+        Filter: {
+          in: "query",
+          name: "filter",
+          description: "Filter fields",
+          required: false,
+          schema: {
+            type: "string",
           },
         },
         Id: {

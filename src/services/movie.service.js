@@ -20,7 +20,7 @@ class MovieService {
 
     return result;
   };
-  getAll = async (search = null, skip = 0, limit = 30) => {
+  getAll = async (search = null, skip = 0, limit = 30, filters = null) => {
     let query = {};
 
     if (search) {

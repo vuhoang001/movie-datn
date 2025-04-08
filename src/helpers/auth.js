@@ -9,6 +9,8 @@ const HEADER = {
 const { GetUserById } = require("../services/repos/user.repos");
 
 const createTokenPair = async (payload) => {
+
+
   try {
     accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {
       expiresIn: "2 days",

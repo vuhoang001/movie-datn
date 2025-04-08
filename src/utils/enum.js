@@ -4,4 +4,8 @@ const ModelStatus = {
   DELETED: "deleted",
 };
 
-module.exports = { ModelStatus };
+const PAYMENT = {
+  ZALOPAY: 'zalo'
+}
+
+module.exports = { ModelStatus, PAYMENT };

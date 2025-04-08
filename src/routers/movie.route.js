@@ -51,6 +51,7 @@ const movieController = require("../controllers/movie.controller");
  *          - $ref: '#/components/parameters/Skip'
  *          - $ref: '#/components/parameters/Limit'
  *          - $ref: '#/components/parameters/Search'
+ *          - $ref: '#/components/parameters/Filter'
  *      responses:
  *          200:
  *              description: success
@@ -97,7 +98,6 @@ router.post(
     { name: "videos", maxCount: 10 },
     { name: "trailer", maxCount: 10 },
   ]),
-  authentication,
   AsyncHandle(movieController.Create)
 );
 
@@ -147,8 +147,8 @@ router.patch(
  *              description: delete success
  */
 router.delete(
-    "/movie/:slug",  // Chỉnh sửa từ :id thành :slug
-    authentication,
-    AsyncHandle(movieController.Delete)
-  );
+  "/movie/:slug", // Chỉnh sửa từ :id thành :slug
+  authentication,
+  AsyncHandle(movieController.Delete)
+);
 module.exports = router;

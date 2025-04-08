@@ -4,12 +4,12 @@ const { convertURL } = require("../utils");
 
 class MovieController {
   GetAll = async (req, res) => {
-    const { skip, limit } = req.query;
+    const { skip, limit, filters } = req.query;
     const { search } = req.query;
 
     new SuccessResponse({
       message: "Get all success",
-      metadata: await movieService.getAll(search, skip, limit),
+      metadata: await movieService.getAll(search, skip, limit, filters),
     }).send(res);
   };
   GetById = async (req, res) => {
