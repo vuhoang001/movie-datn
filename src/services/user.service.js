@@ -64,7 +64,7 @@ class UserService {
 
     return {
       user: getInfoData({
-        fields: ["_id", "name", "email"],
+        fields: ["_id", "name", "email", "price", "thumbnail"],
         object: newAccount,
       }),
     };

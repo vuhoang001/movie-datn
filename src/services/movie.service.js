@@ -55,7 +55,11 @@ class MovieService {
       .limit(limit)
       .populate("language")
       .populate("genre")
-      .populate("actors");
+      .populate("actors")
+      .populate({
+        path: "comments.user",
+        select: "name thumbanil email",
+      });
 
     return data;
   };
