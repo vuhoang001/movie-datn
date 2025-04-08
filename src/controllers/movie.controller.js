@@ -63,7 +63,7 @@ class MovieController {
   };
 
   AddComment = async (req, res) => {
-    const movieId = req.parrams.id;
+    const movieId = req.params.id;
     const user = req.user;
 
     new SuccessResponse({

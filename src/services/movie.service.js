@@ -93,7 +93,7 @@ class MovieService {
     if (!movie) throw new BadRequestError("no datas");
 
     movie.comments.push({
-      user: user._id,
+      user: user,
       content,
       rating,
     });
