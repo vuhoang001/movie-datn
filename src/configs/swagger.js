@@ -12,9 +12,9 @@ const swaggerOptions = {
       description: "API documentation using Swagger", // Mô tả ngắn gọn về API
     },
     servers: [
-      { url: "http://localhost:3005" }, 
+      { url: "http://localhost:3005" },
       {
-        url: "http://localhost:3000", 
+        url: "http://localhost:3000",
       },
     ],
     components: {
@@ -38,6 +38,14 @@ const swaggerOptions = {
         SlugParam: {
           in: "path", // Sửa lại thành "path" thay vì "path"
           name: "slug", // Sửa lại để có tên tham số là "slug"
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+        CommentId: {
+          in: "path",
+          name: "commentId",
           required: true,
           schema: {
             type: "string",

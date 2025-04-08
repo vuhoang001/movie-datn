@@ -15,6 +15,20 @@ const movieController = require("../controllers/movie.controller");
 
 /**
  * @swagger
+ *  components:
+ *    schemas:
+ *      CommentModel:
+ *        type: object
+ *        properties:
+ *          content:
+ *            type: string
+ *          rating:
+ *            type: number
+ *
+ */
+
+/**
+ * @swagger
  * components:
  *  schemas:
  *      Movie:
@@ -150,5 +164,54 @@ router.delete(
   "/movie/:slug", // Chỉnh sửa từ :id thành :slug
   authentication,
   AsyncHandle(movieController.Delete)
+);
+
+/**
+ * @swagger
+ *  /movie/{id}/comment:
+ *    post:
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - $ref: '#/components/parameters/Id'
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CommentModel'
+ *      responses:
+ *        200:
+ *          description: success
+ */
+router.post(
+  "/movie/:id/comment",
+  authentication,
+  AsyncHandle(movieController.AddComment)
+);
+
+/**
+ * @swagger
+ *  /movie/{id}/comment/{commentId}:
+ *    delete:
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - $ref: '#/components/parameters/Id'
+ *        - $ref: '#/components/parameters/CommentId'
+ *      responses:
+ *        200:
+ *          description: Successfully removed comment from the product
+ *        400:
+ *          description: Bad request (comment not found or unauthorized)
+ *        404:
+ *          description: Product not found
+ */
+router.delete(
+  "/movie/:id/comment/:commentId",
+  authentication,
+  AsyncHandle(movieController.RemoveComment)
 );
 module.exports = router;

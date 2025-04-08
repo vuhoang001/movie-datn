@@ -61,6 +61,31 @@ class MovieController {
       metadata: await movieService.create(items),
     }).send(res);
   };
+
+  AddComment = async (req, res) => {
+    const movieId = req.parrams.id;
+    const user = req.user;
+
+    new SuccessResponse({
+      message: "Add comment success",
+      metadata: await movieService.AddComment(movieId, req.body, user.userId),
+    }).send(res);
+  };
+
+  RemoveComment = async (req, res) => {
+    const movieId = req.params.id;
+    commentId = req.params.commentId;
+    const user = req.user;
+
+    new SuccessResponse({
+      message: "Remove comment success",
+      metadata: await movieService.RemoveComment(
+        movieId,
+        commentId,
+        user.userId
+      ),
+    }).send(res);
+  };
 }
 
 module.exports = new MovieController();

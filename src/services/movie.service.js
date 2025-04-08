@@ -81,6 +81,39 @@ class MovieService {
     if (!holder) throw new BadRequestError("no datasF");
     return holder;
   };
+
+  AddComment = async (id, payload, user) => {
+    const { content, rating } = payload;
+
+    const movie = await movieModel.findOne({ _id: id });
+    if (!movie) throw new BadRequestError("no datas");
+
+    movie.comments.push({
+      user: user._id,
+      content,
+      rating,
+    });
+
+    await movie.save();
+    return "Successfully added comment";
+  };
+
+  RemoveComment = async (id, commentId, user) => {
+    const movie = await movieModel.findOne({ _id: id });
+    if (!movie) throw new BadRequestError("no datas");
+
+    const commentIndex = movie.comments.findIndex(
+      (comment) =>
+        comment._id.toString() === commentId &&
+        comment.user.toString() === user.toString()
+    );
+
+    if (commentIndex === -1) throw new BadRequestError("no datas");
+
+    movie.comments.splice(commentIndex, 1);
+    await movie.save();
+    return "Successfully removed comment";
+  };
 }
 
 module.exports = new MovieService();
