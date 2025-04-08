@@ -11,7 +11,7 @@ const bcrypt = require("bcrypt");
 class UserService {
   GetMe = async (user) => {
     const response = await AccountModel.findOne({ _id: user.userId }).select(
-      "_id name email thumbnail createdAt updatedAt"
+      "_id name email thumbnail createdAt updatedAt accountBalance"
     );
     return response;
   };
@@ -64,7 +64,14 @@ class UserService {
 
     return {
       user: getInfoData({
-        fields: ["_id", "name", "email", "price", "thumbnail"],
+        fields: [
+          "_id",
+          "name",
+          "email",
+          "price",
+          "thumbnail",
+          "accountBalance",
+        ],
         object: newAccount,
       }),
     };
