@@ -57,6 +57,7 @@ class MovieService {
       .populate("language")
       .populate("genre")
       .populate("actors")
+      .populate("director")
       .populate({
         path: "comments.user",
         select: "name thumbanil email",
@@ -81,7 +82,12 @@ class MovieService {
       })
       .populate("genre")
       .populate("language")
-      .populate("actors");
+      .populate("director")
+      .populate("actors")
+      .populate({
+        path: "comments.user",
+        select: "name thumbnail email",
+      });
 
     if (!holder) throw new BadRequestError("no datasF");
     return holder;
@@ -117,7 +123,6 @@ class MovieService {
 
     userHolder.moviePurchased.push(movieId);
     movieHolder.views += 1;
-
     await userHolder.save();
 
     return "Success";

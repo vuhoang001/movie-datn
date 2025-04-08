@@ -59,6 +59,7 @@ const MovieSchema = new Schema(
     },
     comments: [CommentSchema],
     genre: { type: [Types.ObjectId], ref: "Genre" },
+    director: { type: Types.ObjectId, ref: "Actor" },
     actors: { type: [Types.ObjectId], ref: "Actor" },
     images: {
       type: [String],
