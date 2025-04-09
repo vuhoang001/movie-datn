@@ -98,12 +98,11 @@ class MovieController {
   };
 
   GetMovieByUserId = async (req, res) => {
-    const userId = req.user.userId;
-    console.log(1);
+    const user = req.user;
 
     new SuccessResponse({
-      message: "Get movie by user id success",
-      metadata: await movieService.getMovieByUserId(userId),
+      message: "movie",
+      metadata: await movieService.getMovieByUserId(user.userId),
     }).send(res);
   };
 }

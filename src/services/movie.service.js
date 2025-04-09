@@ -94,9 +94,9 @@ class MovieService {
   };
 
   getMovieByUserId = async (userId) => {
-    console.log(1)
-    console.log(userId);
-    const movie = await userModel.findOne({ _id: userId });
+    const movie = await userModel
+      .findOne({ _id: userId })
+      .populate("moviePurchased");
 
     return movie.moviePurchased;
   };

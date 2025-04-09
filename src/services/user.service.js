@@ -47,6 +47,30 @@ class UserService {
       rtokenExp: tokens.rTokenTime.exp,
     };
   };
+  Update = async (id, data) => {
+    const holderAccount = await AccountModel.findOne({
+      _id: convertToObjectIdMongose(id),
+    });
+    if (!holderAccount) throw new AuthFailureError("can not find account");
+
+    Object.assign(holderAccount, data);
+
+    await holderAccount.save();
+    return holderAccount;
+  };
+
+  Update = async (req, res) => {
+    let { images } = req.files;
+    let items = JSON.parse(req.body.items);
+    if (images) {
+      items.thumbnail = convertURL(images)[0];
+    }
+
+    new SuccessResponse({
+      message: "update success",
+      metadata: await userService.Update(req.user.userId, items),
+    }).send(res);
+  };
 
   Register = async ({ name, email, password }) => {
     const holderAccount = await AccountModel.findOne({ email: email });

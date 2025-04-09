@@ -74,6 +74,25 @@ router.get("/movies", AsyncHandle(movieController.GetAll));
 
 /**
  * @swagger
+ *  /movie/me:
+ *    get:
+ *      summary: Get movie by user
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: success
+ *
+ */
+router.get(
+  "/movie/me",
+  authentication,
+  AsyncHandle(movieController.GetMovieByUserId)
+);
+
+/**
+ * @swagger
  * /movie/{slug}:
  *  get:
  *      summary: Get by id
@@ -236,23 +255,6 @@ router.post(
   "/movie/:id/buy",
   authentication,
   AsyncHandle(movieController.BuyMovie)
-);
-
-/**
- * @swagger
- *  /movie/me:
- *    get:
- *      tags: [Movie]
- *      security:
- *        - bearerAuth: []
- *      responses:
- *        200:
- *          description: succeses
- */
-router.get(
-  "/movie/:id/buy",
-  authentication,
-  AsyncHandle(movieController.GetMovieByUserId)
 );
 
 module.exports = router;
