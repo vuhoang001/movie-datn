@@ -93,6 +93,26 @@ router.get(
 
 /**
  * @swagger
+ *  /movie/checking/{id}:
+ *    post:
+ *      summary: Checking movie
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - $ref: '#/components/parameters/Id'
+ *      responses:
+ *        200:
+ *          description: success
+ */
+router.post(
+  "/movie/checking/:id",
+  authentication,
+  AsyncHandle(movieController.CheckMovie)
+);
+
+/**
+ * @swagger
  * /movie/{slug}:
  *  get:
  *      summary: Get by id

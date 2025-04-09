@@ -105,6 +105,17 @@ class MovieController {
       metadata: await movieService.getMovieByUserId(user.userId),
     }).send(res);
   };
+
+  CheckMovie = async (req, res) => {
+    const user = req.user;
+    const movieId = req.params.id;
+    console.log(1)
+
+    new SuccessResponse({
+      message: "Check movie success",
+      metadata: await movieService.checkMovie(user.userId, movieId),
+    }).send(res);
+  };
 }
 
 module.exports = new MovieController();

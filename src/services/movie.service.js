@@ -100,6 +100,15 @@ class MovieService {
 
     return movie.moviePurchased;
   };
+  checkMovie = async (userId, movieId) => {
+    const movie = await userModel
+      .findOne({ _id: userId })
+      .populate("moviePurchased");
+
+    return movie.moviePurchased.find(
+      (movie) => movie._id.toString() == movieId.toString()
+    );
+  };
 
   AddComment = async (id, payload, user) => {
     const { content, rating } = payload;
