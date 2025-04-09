@@ -1,4 +1,5 @@
 const { SuccessResponse } = require("../response/success.response");
+const { convertURL } = require("../utils/index");
 const userService = require("../services/user.service");
 
 class UserController {
