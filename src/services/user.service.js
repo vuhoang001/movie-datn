@@ -59,20 +59,7 @@ class UserService {
     return holderAccount;
   };
 
-  Update = async (req, res) => {
-    let { images } = req.files;
-    let items = JSON.parse(req.body.items);
-    if (images) {
-      items.thumbnail = convertURL(images)[0];
-    }
-
-    new SuccessResponse({
-      message: "update success",
-      metadata: await userService.Update(req.user.userId, items),
-    }).send(res);
-  };
-
-  Register = async ({ name, email, password }) => {
+   Register = async ({ name, email, password }) => {
     const holderAccount = await AccountModel.findOne({ email: email });
     if (holderAccount) throw new AuthFailureError("account is registed");
 

@@ -8,6 +8,18 @@ class UserController {
       metadata: await userService.Login(req.body),
     }).send(res);
   };
+  Update = async (req, res) => {
+    let { images } = req.files;
+    let items = JSON.parse(req.body.items);
+    if (images) {
+      items.thumbnail = convertURL(images)[-1];
+    }
+
+    new SuccessResponse({
+      message: "update success",
+      metadata: await userService.Update(req.user.userId, items),
+    }).send(res);
+  };
 
   Register = async (req, res) => {
     new SuccessResponse({
