@@ -151,4 +151,30 @@ router.post("/handleRF", authentication, AsyncHandle(userController.HandleRF));
  */
 router.get("/get-me", authentication, AsyncHandle(userController.GetMe));
 
+/**
+ * @swagger
+ * /update-password:
+ *   patch:
+ *     summary: Update user password
+ *     tags: [Account]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 description: New password for the account
+ *               newPassword:
+ *                  type: string
+ */
+router.patch(
+  "/update-password",
+  authentication,
+  AsyncHandle(userController.UpdatePassword)
+);
 module.exports = router;

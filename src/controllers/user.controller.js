@@ -21,7 +21,13 @@ class UserController {
       metadata: await userService.Update(req.user.userId, items),
     }).send(res);
   };
-
+  UpdatePassword = async (req, res) => {
+    const user = req.user;
+    new SuccessResponse({
+      message: "Register success",
+      metadata: await userService.UpdatePassword(req.body, user.userId),
+    }).send(res);
+  };
   Register = async (req, res) => {
     new SuccessResponse({
       message: "register success",
