@@ -10,9 +10,9 @@ const bcrypt = require("bcrypt");
 
 class UserService {
   GetMe = async (user) => {
-    const response = await AccountModel.findOne({ _id: user.userId }).select(
-      "-password"
-    );
+    const response = await AccountModel.findOne({ _id: user.userId })
+      .select("-password")
+      .populate("moviePurchased");
     return response;
   };
 
@@ -59,7 +59,7 @@ class UserService {
     return holderAccount;
   };
 
-   Register = async ({ name, email, password }) => {
+  Register = async ({ name, email, password }) => {
     const holderAccount = await AccountModel.findOne({ email: email });
     if (holderAccount) throw new AuthFailureError("account is registed");
 

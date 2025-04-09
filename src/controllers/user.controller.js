@@ -13,7 +13,7 @@ class UserController {
     let { images } = req.files;
     let items = JSON.parse(req.body.items);
     if (images) {
-      items.thumbnail = convertURL(images)[-1];
+      items.thumbnail = convertURL(images)[0];
     }
 
     new SuccessResponse({
