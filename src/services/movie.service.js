@@ -26,12 +26,10 @@ class MovieService {
     let query = {};
 
     if (search) {
-      // Tạo điều kiện tìm kiếm
       let orConditions = [
         { movieName: { $regex: search, $options: "i" } }, // Tìm theo tên phim
       ];
 
-      // 🔍 Tìm danh sách ID của actors, genre theo tên
       const [actorIds, genreIds] = await Promise.all([
         actorModel
           .find({ actorName: { $regex: search, $options: "i" } })
@@ -62,7 +60,8 @@ class MovieService {
       .populate({
         path: "comments.user",
         select: "name thumbanil email",
-      });
+      })
+      .select("-video");
 
     return data;
   };
@@ -76,7 +75,7 @@ class MovieService {
     return true;
   };
 
-  getById = async (slug) => {
+  getById = async (slug, userId) => {
     const holder = await movieModel
       .findOne({
         _id: convertToObjectIdMongose(slug),
@@ -90,15 +89,17 @@ class MovieService {
         select: "name thumbnail email",
       });
 
-    const series = await seriesModel
-      .findOne({
-        episodes: { $in: slug },
-      }).populate('episodes')
+    console.log(holder.price);
+    if (holder.price > 0) {
+      const user = await userModel.findOne({ _id: userId });
+      if (!user) throw new BadRequestError("Không có quyền cho bộ phim này");
+      console.log(user);
 
-
+      let flag = user.moviePurchased.some((item) => item === slug);
+      if (!flag) throw new BadRequestError("Không có quyền cho bộ phim này");
+    }
 
     if (!holder) throw new BadRequestError("no datasF");
-    holder.series = series;
 
     return holder;
   };

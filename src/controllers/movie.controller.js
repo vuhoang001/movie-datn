@@ -14,9 +14,10 @@ class MovieController {
   };
   GetById = async (req, res) => {
     const { slug } = req.params;
+    const user = req.user
     new SuccessResponse({
       message: "Get by id",
-      metadata: await movieService.getById(slug),
+      metadata: await movieService.getById(slug, user.userId),
     }).send(res);
   };
 

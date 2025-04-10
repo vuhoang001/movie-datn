@@ -117,6 +117,8 @@ router.post(
  *  get:
  *      summary: Get by id
  *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
  *      parameters:
  *          - $ref: '#/components/parameters/SlugParam'
  *      responses:
@@ -124,7 +126,11 @@ router.post(
  *              description: success
  *
  */
-router.get("/movie/:slug", AsyncHandle(movieController.GetById));
+router.get(
+  "/movie/:slug",
+  authentication,
+  AsyncHandle(movieController.GetById)
+);
 
 /**
  * @swagger
