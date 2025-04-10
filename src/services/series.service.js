@@ -24,10 +24,7 @@ class SeriesService {
   };
 
   Create = async (payload) => {
-    const { title, genre, description, episodes } = payload;
-
-    const gerneHolder = await genreModel.findOne({ _id: genre });
-    if (!gerneHolder) throw new BadRequestError("Không tìm thấy thể loại");
+    const { title, description, episodes } = payload;
 
     const holderMovie = await movieModel.find({ _id: { $in: episodes } });
     if (holderMovie.length != episodes.length)
@@ -36,7 +33,7 @@ class SeriesService {
     const data = new seriesModel({
       title: title,
       description: description,
-      genre: gerneHolder._id,
+
       episodes: episodes,
     });
 
@@ -46,13 +43,10 @@ class SeriesService {
   };
 
   Update = async (id, payload) => {
-    const { title, genre, description, episodes } = payload;
+    const { title, description, episodes } = payload;
     const seriesHolder = await seriesModel.findOne({ _id: id });
     if (!seriesHolder)
       throw new BadRequestError("Không tìm thấy series: ", seriesHolder);
-
-    const gerneHolder = await genreModel.findOne({ _id: genre });
-    if (!gerneHolder) throw new BadRequestError("Không tìm thấy thể loại");
 
     const holderMovie = await movieModel.find({ _id: { $in: episodes } });
     if (holderMovie.length != episodes.length)
@@ -60,7 +54,7 @@ class SeriesService {
 
     seriesHolder.title = title;
     seriesHolder.description = description;
-    seriesHolder.genre = genre;
+
     seriesHolder.episodes = episodes;
 
     await seriesHolder.save();

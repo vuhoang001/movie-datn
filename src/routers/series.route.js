@@ -19,8 +19,6 @@ const { AsyncHandle } = require("../helpers/AsyncHandle");
  *                      type: string
  *                  description:
  *                      type: string
- *                  genre:
- *                      type: string
  *                  episodes:
  *                      type: array
  *                      items:

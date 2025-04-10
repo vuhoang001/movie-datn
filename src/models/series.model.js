@@ -6,7 +6,7 @@ const COLLECTION_NAME = "Series";
 const SeriesSchema = new Schema(
   {
     title: { type: String },
-    genre: { type: Schema.Types.ObjectId },
+
     description: String,
     episodes: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
   },
