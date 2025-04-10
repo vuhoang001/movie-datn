@@ -10,9 +10,9 @@ const configs = {
     key1: "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
     key2: "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
     endpoint: "https://sb-openapi.zalopay.vn/v2/create",
-    callback_url: "https://fa40-222-252-105-117.ngrok-free.app/callback",
+    callback_url: "https://e9ef-222-252-105-117.ngrok-free.app/callback",
     redirecturl:
-      "http://demo.phuclong.foxai.com.vn/admin/approval-quotation/",
+      "http://localhost:5173/client",
   },
 };
 

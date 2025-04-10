@@ -91,13 +91,15 @@ class MovieService {
       });
 
     const series = await seriesModel
-      .find({
+      .findOne({
         episodes: { $in: slug },
-      })
-      .populate("episodes");
+      }).populate('episodes')
+
+
 
     if (!holder) throw new BadRequestError("no datasF");
-    holder.episodes = series;
+    holder.series = series;
+
     return holder;
   };
 
