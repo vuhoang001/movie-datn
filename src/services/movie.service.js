@@ -2,6 +2,7 @@ const movieModel = require("../models/movie.model");
 const userModel = require("../models/user.model");
 const { BadRequestError } = require("../response/error.response");
 const { convertToObjectIdMongose } = require("../utils");
+const seriesModel = require("../models/series.model");
 
 class MovieService {
   create = async (data) => {
@@ -89,7 +90,14 @@ class MovieService {
         select: "name thumbnail email",
       });
 
+    const series = await seriesModel
+      .find({
+        episodes: { $in: slug },
+      })
+      .populate("episodes");
+
     if (!holder) throw new BadRequestError("no datasF");
+    holder.episodes = series;
     return holder;
   };
 
