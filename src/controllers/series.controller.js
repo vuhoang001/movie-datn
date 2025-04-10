@@ -38,6 +38,15 @@ class SeriesController {
       metadata: await seriesService.Delete(id),
     }).send(res);
   };
+
+
+  GetByMovie = async(req, res) => {
+    const id = req.params.id
+
+    new SuccessResponse({
+      metadata: await seriesService.GetByMovie(id)
+    }).send(res)
+  }
 }
 
 module.exports = new SeriesController();

@@ -23,6 +23,12 @@ class SeriesService {
     return series;
   };
 
+  GetByMovie = async (id) => {
+    const serier = await seriesModel.findOne({ episodes: { $in: id } }).populate('episodes');
+
+    return serier
+  };
+
   Create = async (payload) => {
     const { title, description, episodes } = payload;
 

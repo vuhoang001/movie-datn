@@ -55,6 +55,20 @@ router.get("/series/:id", AsyncHandle(seriesController.GetByid));
 
 /**
  * @swagger
+ *  /series/movie/{id}:
+ *      get:
+ *          summary: Get by movie
+ *          tags: [Series]
+ *          parameters:
+ *              - $ref: '#/components/parameters/Id'
+ *          responses:
+ *              200:
+ *                  description: success
+ */
+router.get("/series/movie/:id", AsyncHandle(seriesController.GetByMovie));
+
+/**
+ * @swagger
  *  /series:
  *      post:
  *          tags: [Series]
