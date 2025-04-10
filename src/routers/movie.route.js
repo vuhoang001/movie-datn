@@ -66,6 +66,7 @@ const movieController = require("../controllers/movie.controller");
  *          - $ref: '#/components/parameters/Limit'
  *          - $ref: '#/components/parameters/Search'
  *          - $ref: '#/components/parameters/Filter'
+ *          - $ref: '#/components/parameters/movieType'
  *      responses:
  *          200:
  *              description: success

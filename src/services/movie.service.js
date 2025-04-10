@@ -22,8 +22,10 @@ class MovieService {
 
     return result;
   };
-  getAll = async (search = null, skip = 0, limit = 30, filters = null) => {
+  getAll = async (search = null, skip = 0, limit = 30, filters = null, movieType = 'L') => {
     let query = {};
+
+    query.movieType = movieType
 
     if (search) {
       let orConditions = [
@@ -48,6 +50,7 @@ class MovieService {
 
       query = { $or: orConditions };
     }
+
 
     const data = await movieModel
       .find(query)
@@ -89,7 +92,7 @@ class MovieService {
         select: "name thumbnail email",
       });
 
-    console.log(holder.price);
+
     if (holder.price > 0) {
       const user = await userModel.findOne({ _id: userId });
       if (!user) throw new BadRequestError("Bạn cần mua tập này trước!");

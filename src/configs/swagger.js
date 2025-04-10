@@ -59,6 +59,13 @@ const swaggerOptions = {
             type: "string",
           },
         },
+        movieType: {
+          in: "path",
+          name: "movieType",
+          schema: {
+            type: "string",
+          },
+        },
         Skip: {
           in: "query",
           name: "skip",
