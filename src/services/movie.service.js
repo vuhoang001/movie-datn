@@ -92,13 +92,13 @@ class MovieService {
     console.log(holder.price);
     if (holder.price > 0) {
       const user = await userModel.findOne({ _id: userId });
-      if (!user) throw new BadRequestError("Không có quyền cho bộ phim này");
+      if (!user) throw new BadRequestError("Bạn cần mua tập này trước!");
       console.log(user);
 
       let flag = user.moviePurchased.some(
         (item) => item.toString() === slug.toString()
       );
-      if (!flag) throw new BadRequestError("Không có quyền cho bộ phim này");
+      if (!flag) throw new BadRequestError("Bạn cần mua tập này trước!");
     }
 
     if (!holder) throw new BadRequestError("no datasF");
