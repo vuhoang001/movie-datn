@@ -12,5 +12,6 @@ router.use("/", require("./wish-list.route"));
 router.use("/", require("./payment.route"));
 router.use("/", require("./branner.route"));
 router.use("/", require("./nation.route"));
+router.use("/", require("./series.route"));
 
 module.exports = router;
