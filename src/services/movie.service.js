@@ -95,7 +95,9 @@ class MovieService {
       if (!user) throw new BadRequestError("Không có quyền cho bộ phim này");
       console.log(user);
 
-      let flag = user.moviePurchased.some((item) => item === slug);
+      let flag = user.moviePurchased.some(
+        (item) => item.toString() === slug.toString()
+      );
       if (!flag) throw new BadRequestError("Không có quyền cho bộ phim này");
     }
 
