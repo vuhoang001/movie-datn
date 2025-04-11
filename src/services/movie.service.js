@@ -99,16 +99,16 @@ class MovieService {
         select: "name thumbnail email",
       });
 
-    if (holder.price > 0) {
-      const user = await userModel.findOne({ _id: userId });
-      if (!user) throw new BadRequestError("Bạn cần mua tập này trước!");
-      console.log(user);
+    // if (holder.price > 0) {
+    //   const user = await userModel.findOne({ _id: userId });
+    //   if (!user) throw new BadRequestError("Bạn cần mua tập này trước!");
+    //   console.log(user);
 
-      let flag = user.moviePurchased.some(
-        (item) => item.toString() === slug.toString()
-      );
-      if (!flag) throw new BadRequestError("Bạn cần mua tập này trước!");
-    }
+    //   let flag = user.moviePurchased.some(
+    //     (item) => item.toString() === slug.toString()
+    //   );
+    //   if (!flag) throw new BadRequestError("Bạn cần mua tập này trước!");
+    // }
 
     if (!holder) throw new BadRequestError("no datasF");
 
