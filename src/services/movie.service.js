@@ -22,10 +22,18 @@ class MovieService {
 
     return result;
   };
-  getAll = async (search = null, skip = 0, limit = 30, filters = null, movieType = 'L') => {
+  getAll = async (
+    search = null,
+    skip = 0,
+    limit = 30,
+    filters = null,
+    movieType
+  ) => {
     let query = {};
 
-    query.movieType = movieType
+    if (movieType) {
+      query.movieType = movieType;
+    }
 
     if (search) {
       let orConditions = [
@@ -50,7 +58,6 @@ class MovieService {
 
       query = { $or: orConditions };
     }
-
 
     const data = await movieModel
       .find(query)
@@ -91,7 +98,6 @@ class MovieService {
         path: "comments.user",
         select: "name thumbnail email",
       });
-
 
     if (holder.price > 0) {
       const user = await userModel.findOne({ _id: userId });
