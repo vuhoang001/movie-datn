@@ -277,4 +277,25 @@ router.post(
   AsyncHandle(movieController.BuyMovie)
 );
 
+/**
+ * @swagger
+ *  /movie/name/{name}:
+ *    get:
+ *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - $ref: '#/components/parameters/Name'
+ *        - $ref: '#/components/parameters/Skip'
+ *        - $ref: '#/components/parameters/Limit'
+ *      responses:
+ *        200:
+ *          description: Successfully removed comment from the product
+ *        400:
+ *          description: Bad request (comment not found or unauthorized)
+ *        404:
+ *          description: Product not found
+ */
+router.get("/movie/name/:name", AsyncHandle(movieController.GetMovieByName));
+
 module.exports = router;

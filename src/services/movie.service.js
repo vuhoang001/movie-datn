@@ -1,5 +1,6 @@
 const movieModel = require("../models/movie.model");
 const userModel = require("../models/user.model");
+const genreModel = require("../models/genre.model");
 const { BadRequestError } = require("../response/error.response");
 const { convertToObjectIdMongose } = require("../utils");
 
@@ -73,6 +74,23 @@ class MovieService {
 
     await movieModel.deleteOne({ _id: convertToObjectIdMongose(slug) });
     return true;
+  };
+
+  GetMovieByName = async (name, skip, limit) => {
+    console.log(name);
+    const genre = await genreModel.findOne({
+      genreName: { $regex: name, $options: "i" },
+    });
+    
+    if (!genre) throw new BadRequestError("Khong tim thay phim");
+
+    const movie = movieModel
+      .find({ genre: genre._id })
+      .skip(skip)
+      .limit(limit)
+      .populate("genre");
+
+    return movie;
   };
 
   getById = async (slug) => {

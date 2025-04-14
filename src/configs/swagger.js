@@ -43,6 +43,14 @@ const swaggerOptions = {
             type: "string",
           },
         },
+        Name: {
+          in: "path", // Sửa lại thành "path" thay vì "path"
+          name: "name", // Sửa lại để có tên tham số là "slug"
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
         CommentId: {
           in: "path",
           name: "commentId",
