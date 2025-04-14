@@ -20,11 +20,14 @@ class ActorService {
 
   Update = async (id, data) => {
     const response = await actorModel.findOne({ _id: id });
-    if (!response) throw new BadRequestError("no datas")
+    if (!response) throw new BadRequestError("no datas");
 
-    const result = await actorModel.update({ _id: convertToObjectIdMongose(response._id) }, data)
+    const result = await actorModel.updateOne(
+      { _id: convertToObjectIdMongose(response._id) },
+      data
+    );
 
-    return result
+    return result;
   };
 
   Delete = async (id) => {

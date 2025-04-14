@@ -37,6 +37,11 @@ const accountSchema = new Schema(
       type: String,
       default: "",
     },
+    role: {
+      type: String,
+      enum: ["A", "C"],
+      default: "C",
+    },
     phone: {
       type: String,
       trim: true,

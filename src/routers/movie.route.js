@@ -66,6 +66,7 @@ const movieController = require("../controllers/movie.controller");
  *          - $ref: '#/components/parameters/Limit'
  *          - $ref: '#/components/parameters/Search'
  *          - $ref: '#/components/parameters/Filter'
+ *          - $ref: '#/components/parameters/movieType'
  *      responses:
  *          200:
  *              description: success
@@ -117,6 +118,8 @@ router.post(
  *  get:
  *      summary: Get by id
  *      tags: [Movie]
+ *      security:
+ *        - bearerAuth: []
  *      parameters:
  *          - $ref: '#/components/parameters/SlugParam'
  *      responses:
@@ -124,7 +127,11 @@ router.post(
  *              description: success
  *
  */
-router.get("/movie/:slug", AsyncHandle(movieController.GetById));
+router.get(
+  "/movie/:slug",
+  authentication,
+  AsyncHandle(movieController.GetById)
+);
 
 /**
  * @swagger

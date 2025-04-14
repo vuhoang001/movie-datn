@@ -3,6 +3,7 @@ const userModel = require("../models/user.model");
 const genreModel = require("../models/genre.model");
 const { BadRequestError } = require("../response/error.response");
 const { convertToObjectIdMongose } = require("../utils");
+const seriesModel = require("../models/series.model");
 
 class MovieService {
   create = async (data) => {
@@ -22,16 +23,24 @@ class MovieService {
 
     return result;
   };
-  getAll = async (search = null, skip = 0, limit = 30, filters = null) => {
+  getAll = async (
+    search = null,
+    skip = 0,
+    limit = 30,
+    filters = null,
+    movieType
+  ) => {
     let query = {};
 
+    if (movieType) {
+      query.movieType = movieType;
+    }
+
     if (search) {
-      // Tạo điều kiện tìm kiếm
       let orConditions = [
         { movieName: { $regex: search, $options: "i" } }, // Tìm theo tên phim
       ];
 
-      // 🔍 Tìm danh sách ID của actors, genre theo tên
       const [actorIds, genreIds] = await Promise.all([
         actorModel
           .find({ actorName: { $regex: search, $options: "i" } })
@@ -62,7 +71,8 @@ class MovieService {
       .populate({
         path: "comments.user",
         select: "name thumbanil email",
-      });
+      })
+      .select("-video");
 
     return data;
   };
@@ -93,7 +103,7 @@ class MovieService {
     return movie;
   };
 
-  getById = async (slug) => {
+  getById = async (slug, userId) => {
     const holder = await movieModel
       .findOne({
         _id: convertToObjectIdMongose(slug),
@@ -107,7 +117,19 @@ class MovieService {
         select: "name thumbnail email",
       });
 
+    // if (holder.price > 0) {
+    //   const user = await userModel.findOne({ _id: userId });
+    //   if (!user) throw new BadRequestError("Bạn cần mua tập này trước!");
+    //   console.log(user);
+
+    //   let flag = user.moviePurchased.some(
+    //     (item) => item.toString() === slug.toString()
+    //   );
+    //   if (!flag) throw new BadRequestError("Bạn cần mua tập này trước!");
+    // }
+
     if (!holder) throw new BadRequestError("no datasF");
+
     return holder;
   };
 

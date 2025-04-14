@@ -49,6 +49,11 @@ const MovieSchema = new Schema(
       type: Number,
       default: 0,
     },
+    movieType: {
+      type: String,
+      enum: ["L", "B"],
+      default: "L",
+    },
     language: {
       type: [Types.ObjectId],
       ref: "Language",

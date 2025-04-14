@@ -2,7 +2,7 @@ const { ReasonPhrases, StatusCodes } = require("./httpStatusCode");
 
 class SuccessResponse {
   constructor({
-    message,
+    message = "Thành công",
     reasonStatus = ReasonPhrases.OK,
     statusCode = StatusCodes.OK,
     metadata = {},

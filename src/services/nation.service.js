@@ -28,6 +28,10 @@ class NationService {
     const holder = await nationModel.findOne({ _id: id });
     return holder;
   };
+
+  
+
+
 }
 
 module.exports = new NationService();
