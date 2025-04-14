@@ -24,43 +24,11 @@ class MovieService {
 
     return result;
   };
-  getAll = async (
-    search = null,
-    skip = 0,
-    limit = 30,
-    filters = null,
-    movieType
-  ) => {
+  getAll = async (search = null, skip = 0, limit = 30) => {
     let query = {};
-
-    if (movieType) {
-      query.movieType = movieType;
-    }
-
     if (search) {
-      let orConditions = [
-        { movieName: { $regex: search, $options: "i" } }, // Tìm theo tên phim
-      ];
-
-      const [actorIds, genreIds] = await Promise.all([
-        actorModel
-          .find({ actorName: { $regex: search, $options: "i" } })
-          .select("_id"),
-        genreModel
-          .find({ genreName: { $regex: search, $options: "i" } })
-          .select("_id"),
-      ]);
-
-      if (actorIds.length > 0) {
-        orConditions.push({ actors: { $in: actorIds.map((a) => a._id) } });
-      }
-      if (genreIds.length > 0) {
-        orConditions.push({ genre: { $in: genreIds.map((g) => g._id) } });
-      }
-
-      query = { $or: orConditions };
+      query = { movieName: { $regex: search, $options: "i" } };
     }
-
     const data = await movieModel
       .find(query)
       .skip(skip)
@@ -88,7 +56,6 @@ class MovieService {
   };
 
   GetMovieByName = async (name, skip, limit) => {
-    console.log(name);
     const genre = await genreModel.findOne({
       genreName: { $regex: name, $options: "i" },
     });
