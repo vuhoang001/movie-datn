@@ -12,7 +12,7 @@ const configs = {
     endpoint: "https://sb-openapi.zalopay.vn/v2/create",
     callback_url: "https://fa40-222-252-105-117.ngrok-free.app/callback",
     redirecturl:
-      "http://demo.phuclong.foxai.com.vn/admin/approval-quotation/",
+      "http://localhost:5173",
   },
 };
 
