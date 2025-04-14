@@ -49,6 +49,9 @@ const MovieSchema = new Schema(
       type: Number,
       default: 0,
     },
+    movieLink: {
+      type: String,
+    },
     movieType: {
       type: String,
       enum: ["L", "B"],
