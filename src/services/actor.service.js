@@ -1,4 +1,5 @@
 const actorModel = require("../models/actor.model");
+const movieModel = require("../models/movie.model");
 const { BadRequestError } = require("../response/error.response");
 const { ModelStatus } = require("../utils/enum");
 const { convertToObjectIdMongose } = require("../utils/index");
@@ -15,7 +16,9 @@ class ActorService {
 
   GetById = async (id) => {
     const data = await actorModel.findOne({ _id: id });
-    return data;
+    const movies = await movieModel.find({ actors: data._id });
+
+    return { data, movies };
   };
 
   Update = async (id, data) => {

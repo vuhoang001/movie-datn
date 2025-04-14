@@ -1,6 +1,7 @@
 const movieModel = require("../models/movie.model");
 const userModel = require("../models/user.model");
 const genreModel = require("../models/genre.model");
+const actorModel = require("../models/actor.model");
 const { BadRequestError } = require("../response/error.response");
 const { convertToObjectIdMongose } = require("../utils");
 const seriesModel = require("../models/series.model");
@@ -91,7 +92,7 @@ class MovieService {
     const genre = await genreModel.findOne({
       genreName: { $regex: name, $options: "i" },
     });
-    
+
     if (!genre) throw new BadRequestError("Khong tim thay phim");
 
     const movie = movieModel
